@@ -9,10 +9,10 @@ include ../mixins.pug
           .mat-caption Don't have an account? #[a(href (click)="login=false") Let's make you an account!]
         form([formGroup]="logInForm")
           mat-grid-list(cols="1" rowHeight="2:1" gutterSize="1.25rem")
-            +InputTextField("email", "Your Email", "logInForm.controls.email", "Required Dude.")(type="email" required disabled)
-            +InputTextField("pass", "Your Email", "logInForm.controls.pass", "Required Dude.")(type="password" required disabled)
+            +InputTextField("email", "Your Email", "logInForm.controls.email", "Required Dude.")(type="email" required "[disabled]"="true")
+            +InputTextField("pass", "Your Email", "logInForm.controls.pass", "Required Dude.")(type="password" required "[disabled]"="true")
       mat-card-actions(fxLayout="row" fxLayoutAlign="center")
-         button(mat-raised-button (disabled)="!logInForm.valid" color="primary") Log In
+         button(mat-raised-button (disabled)="!logInForm.valid" color="primary" "(click)"="submitLogin()") Log In
 
 
     mat-card(style="width:30vw" "*ngIf"="login==false")

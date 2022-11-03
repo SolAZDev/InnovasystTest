@@ -1,0 +1,21 @@
+
+<table class="w-100" mat-table="" [dataSource]="users">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell="mat-header-cell" *matHeaderCellDef="">Name</th>
+    <td mat-cell="mat-cell" *matCellDef="let user">{{user.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell="mat-header-cell" *matHeaderCellDef="">Email</th>
+    <td mat-cell="mat-cell" *matCellDef="let user">{{user.email}}</td>
+  </ng-container>
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell="mat-header-cell" *matHeaderCellDef="">Gender</th>
+    <td mat-cell="mat-cell" *matCellDef="let user">{{user.gender}}</td>
+  </ng-container>
+  <ng-container matColumnDef="active">
+    <th mat-header-cell="mat-header-cell" *matHeaderCellDef="">Active</th>
+    <td mat-cell="mat-cell" *matCellDef="let user">{{user.status}}</td>
+  </ng-container>
+  <tr mat-header-row="mat-header-row" *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-header-row="mat-header-row" *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

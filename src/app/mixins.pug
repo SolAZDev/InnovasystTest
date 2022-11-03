@@ -1,0 +1,12 @@
+mixin InputTextField(model='', label='label', formValueCheck='', requireText='required')
+  mat-form-field(appearance="fill" class="w-100" )
+    mat-label= label
+    input(matInput='' formControlName=model)&attributes(attributes)
+    mat-error(\*ngIf=formValueCheck+".invalid")= requireText
+
+mixin InputSelectField(model='', label='label',options='', formValueCheck='', requireText='required')
+  mat-form-field(appearance="fill" class="w-100")
+    mat-label= label
+    mat-select(formControlName=model)
+      mat-option(*ngFor="let opt of "+options "[value]"="opt.value") {{opt.name}}
+    mat-error(*ngIf=formValueCheck+".invalid")= requireText

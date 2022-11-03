@@ -1,4 +1,26 @@
 # InnovasystTest
+An assesment from Innovasyst. 
+
+
+### Deployment
+https://solazdev.github.io/InnovasystTest
+### Solutions
+1. Form Validations
+  * The Register and Login page features 2 forms, one for each. They are using FormBuilders and Validators to facilitate validating the forms.
+2. API Integration
+  * Implemented a Per-Page, rather than a service. 
+  * The Registration form uses a POST to GoRest.co.in's user Creation endpoint, however, even with their example, it returns a `{"message":"Authentication failed"}`. So in the component, it is ignored, and redirects the user to the login form.
+  * The Users Viewer page uses a GET from GoRest.co.in, where it obtains a list of users. It seems to auto-limit itself to 9.
+    * The Users list is then displayed via a `mat-table` 
+3. Hard Coded Loging
+  * As I did not find a login for GoRest.co.in, I simplified this to a pre-set login, with disabled fields.
+
+
+
+
+
+# Angular Starter
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
 

@@ -2,6 +2,7 @@ import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in-register',
@@ -13,6 +14,7 @@ export class LogInRegisterComponent implements OnInit {
   login = true;
   fb = inject(FormBuilder);
   http = inject(HttpClient);
+  router = inject(Router)
 
   logInForm = this.fb.group({
     email: ["testUser@gorest.io", [Validators.required, Validators.email]],
@@ -37,7 +39,7 @@ export class LogInRegisterComponent implements OnInit {
   ngOnInit(): void { }
 
   submitRegistration() {
-    // if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid) return;
     const body = {
       name: this.registerForm.controls.fName.value + " " + this.registerForm.controls.lName.value,
       gender: this.genderList.find(g => g.value == this.registerForm.controls.gender.value)?.name.toLowerCase(),
@@ -49,5 +51,10 @@ export class LogInRegisterComponent implements OnInit {
     })
     this.login = true;
     alert("Account Created!");
+  }
+
+  submitLogin() {
+    if (this.logInForm.invalid) return;
+    this.router.navigateByUrl('/users');
   }
 }

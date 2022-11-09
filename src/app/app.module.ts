@@ -18,12 +18,14 @@ import { MatSelectModule } from '@angular/material/select'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserListComponent } from './user-list/user-list.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInRegisterComponent,
-    UserListComponent
+    UserListComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

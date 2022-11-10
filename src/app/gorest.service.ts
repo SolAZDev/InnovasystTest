@@ -29,4 +29,27 @@ export class GorestService {
     } catch (error) { this.reportError(error); return null; }
   }
 
+  put(url: string, body: any) {
+    try {
+      return this.http.put(this.baseUrl + url, body, {
+        headers: { Authorization: "Bearer " + this.bearKey }
+      })
+    } catch (error) { this.reportError(error); return null; }
+  }
+
+
+  /**
+   * Deletes User. USE WITH CAUTION
+   *
+   * @param {string} url
+   * @return {*}
+   * @memberof GorestService
+   */
+  delete(url: string) {
+    try {
+      return this.http.delete(this.baseUrl + url, {
+        headers: { Authorization: "Bearer " + this.bearKey }
+      })
+    } catch (error) { this.reportError(error); return null; }
+  }
 }

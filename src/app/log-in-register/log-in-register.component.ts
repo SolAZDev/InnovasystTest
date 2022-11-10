@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GorestService } from '../gorest.service';
 
 @Component({
   selector: 'app-log-in-register',
@@ -13,7 +14,7 @@ export class LogInRegisterComponent implements OnInit {
 
   login = true;
   fb = inject(FormBuilder);
-  http = inject(HttpClient);
+  http = inject(GorestService)
   router = inject(Router)
 
   logInForm = this.fb.group({
@@ -46,11 +47,11 @@ export class LogInRegisterComponent implements OnInit {
       email: this.registerForm.controls.email.value,
       status: 'active'
     }
-    this.http.post("https://gorest.co.in/public/v2/users", body).subscribe(res => {
-      //Their example always says its not authorized, so we just ignore it here.
+    this.http.post('/users', body)?.subscribe(reg => {
+      alert("Account Created!");
+      this.router.navigateByUrl('/users');
     })
-    this.login = true;
-    alert("Account Created!");
+    // this.login = true;
   }
 
   submitLogin() {

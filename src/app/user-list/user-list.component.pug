@@ -1,3 +1,5 @@
+include ../mixins.pug
+
 table.w-100(mat-table="" "[dataSource]"="users")
   ng-container(matColumnDef="name")
     th(mat-header-cell *matHeaderCellDef="") Name
@@ -14,5 +16,40 @@ table.w-100(mat-table="" "[dataSource]"="users")
   ng-container(matColumnDef="active")
     th(mat-header-cell *matHeaderCellDef="") Active
     td(mat-cell *matCellDef="let user") {{user.status}}
+
+  ng-container(matColumnDef="tools")
+    th.text-center(mat-header-cell *matHeaderCellDef="") Tools
+    td(mat-cell *matCellDef="let user")
+      div(fxLayout="row" fxLayoutAlign="space-around" style="max-width:8vw")
+        mat-icon.text-red(fontIcon="edit" "(click)"="openEdDialog(user)")
+        mat-icon.text-red(fontIcon="delete" "(click)"="openDelDialog(user)")
+
+
   tr(mat-header-row *matHeaderRowDef="displayedColumns")
   tr(mat-header-row *matRowDef="let row; columns: displayedColumns")
+
+
+ng-template("#delUser"="")
+  h1(mat-dialog-title) Delete user?
+  div(mat-dialog-content)
+    p Are you sure you wish to delete {{activeUser.name}}
+  div(mat-dialog-actions *ngIf="!displaySpinner")
+    button(mat-button "(click)"="closeDialog()") Cancel
+    button(mat-button "(click)"="deleteUser()") Delete
+  div(mat-dialog-actions *ngIf="  displaySpinner")
+    mat-spinner
+
+
+ng-template("#editUser"="")
+  h1(mat-dialog-title) Edit User?
+  div(mat-dialog-content [formGroup]="userEdit")
+    +InputTextField("fName", "First Name", "userEdit.controls.fName", "Who art thout?")(type="text" required maxlength="20")
+    +InputTextField("lName", "Last Name", "userEdit.controls.lName", "From where doest thou hail?")(type="text" required maxlength="20")
+    +InputTextField("email", "Your Email", "userEdit.controls.email", "A Valid email is required")(type="email" required)
+  div(mat-dialog-actions *ngIf="!displaySpinner")
+    button(mat-button "(click)"="closeDialog()") Cancel
+    button(mat-button "(click)"="updateUser()") Update
+  div(mat-dialog-actions *ngIf="displaySpinner")
+    mat-spinner
+
+

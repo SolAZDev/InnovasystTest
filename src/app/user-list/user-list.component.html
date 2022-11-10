@@ -16,6 +16,55 @@
     <th mat-header-cell="mat-header-cell" *matHeaderCellDef="">Active</th>
     <td mat-cell="mat-cell" *matCellDef="let user">{{user.status}}</td>
   </ng-container>
+  <ng-container matColumnDef="tools">
+    <th class="text-center" mat-header-cell="mat-header-cell" *matHeaderCellDef="">Tools</th>
+    <td mat-cell="mat-cell" *matCellDef="let user">
+      <div fxLayout="row" fxLayoutAlign="space-around" style="max-width:8vw">
+        <mat-icon class="text-red" fontIcon="edit" (click)="openEdDialog(user)"></mat-icon>
+        <mat-icon class="text-red" fontIcon="delete" (click)="openDelDialog(user)"></mat-icon>
+      </div>
+    </td>
+  </ng-container>
   <tr mat-header-row="mat-header-row" *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-header-row="mat-header-row" *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+<ng-template #delUser="">
+  <h1 mat-dialog-title="mat-dialog-title">Delete user?</h1>
+  <div mat-dialog-content="mat-dialog-content">
+    <p>Are you sure you wish to delete {{activeUser.name}}</p>
+  </div>
+  <div mat-dialog-actions="mat-dialog-actions" *ngIf="!displaySpinner">
+    <button mat-button="mat-button" (click)="closeDialog()">Cancel</button>
+    <button mat-button="mat-button" (click)="deleteUser()">Delete</button>
+  </div>
+  <div mat-dialog-actions="mat-dialog-actions" *ngIf="  displaySpinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+<ng-template #editUser="">
+  <h1 mat-dialog-title="mat-dialog-title">Edit User?</h1>
+  <div mat-dialog-content="mat-dialog-content" [formGroup]="userEdit">
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput="" formControlName="fName" type="text" required="required" maxlength="20"/>
+      <mat-error *ngIf="userEdit.controls.fName.invalid">Who art thout?</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput="" formControlName="lName" type="text" required="required" maxlength="20"/>
+      <mat-error *ngIf="userEdit.controls.lName.invalid">From where doest thou hail?</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>Your Email</mat-label>
+      <input matInput="" formControlName="email" type="email" required="required"/>
+      <mat-error *ngIf="userEdit.controls.email.invalid">A Valid email is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions="mat-dialog-actions" *ngIf="!displaySpinner">
+    <button mat-button="mat-button" (click)="closeDialog()">Cancel</button>
+    <button mat-button="mat-button" (click)="updateUser()">Update</button>
+  </div>
+  <div mat-dialog-actions="mat-dialog-actions" *ngIf="displaySpinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

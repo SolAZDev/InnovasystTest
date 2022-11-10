@@ -15,17 +15,20 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatTableModule } from '@angular/material/table'
 import { MatSelectModule } from '@angular/material/select'
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from "@angular/material/icon"
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+
+
 import { UserListComponent } from './user-list/user-list.component';
-import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInRegisterComponent,
     UserListComponent,
-    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     MatToolbarModule, MatCardModule,
     MatFormFieldModule, MatButtonModule, MatTableModule,
     MatGridListModule, MatInputModule, MatSelectModule,
-    ReactiveFormsModule, FormsModule
+    ReactiveFormsModule, FormsModule, MatDialogModule,
+    MatProgressSpinnerModule, MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
